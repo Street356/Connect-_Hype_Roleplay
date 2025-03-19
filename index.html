@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLYNT ROLEPLAY</title>
+    <style>
+        /* Fundo escuro para o corpo da página, agora com uma imagem */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://cdn.discordapp.com/attachments/1346929805051957268/1351721789981458562/IMG_20250211_184849_622.webp?ex=67db6884&is=67da1704&hm=a52a225359b8de44a910275b85247353bf5c2f9596997247d331206518cd47d4&'); /* Substitua com a URL da sua imagem */
+            background-size: cover;  /* Para cobrir toda a tela */
+            background-position: center center; /* Para centralizar a imagem */
+            background-attachment: fixed; /* Para manter a imagem fixa ao rolar a página */
+        }
+
+        /* Estilo do fundo dos diálogos */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 15%;
+            width: 100%;
+            height: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Estilo da caixa de conteúdo do diálogo com tamanho reduzido */
+        .modal-content {
+            background-color: #333;
+            margin-left: 10px;
+            padding: 12px;
+            border: 1px solid #e74c3c;
+            width: 280px;
+            text-align: center;
+            color: #fff;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Estilo do botão de fechar */
+        .close {
+            color: #e74c3c;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilo do botão de abrir diálogo */
+        .openModalBtn {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: block;
+            margin: 15px auto;
+        }
+
+        .openModalBtn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Título em azul e negrito */
+        h2 {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Estilo para os botões das opções */
+        .options button, .options a {
+            padding: 8px 16px;
+            font-size: 14px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+        }
+
+        .options button:hover, .options a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo para o título centralizado no topo da página */
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        /* Estilo para o rodapé */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #bbb;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #121212;
+            padding: 8px;
+        }
+
+        .footer a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para a imagem da logo */
+        .logo-img {
+            display: block;
+            margin: 1px auto;
+            max-width: 80px;
+            border-radius: 100px;
+        }
+
+        /* Estilo para a data e hora */
+        .datetime {
+            font-size: 14px;
+            color: #fff;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Imagem logo no topo -->
+    <img src="https://cdn.discordapp.com/attachments/1346929805051957268/1351721808197582858/IMG_20250211_184810_381.webp?ex=67db6888&is=67da1708&hm=7c6391fc2698bacdc2ea2e2b2c459e8e854009170d04946b42f58325aed1ab39&" alt="Logo do Flynt Roleplay" class="logo-img">
+
+    <!-- Título centralizado no topo da página -->
+    <div class="main-title">
+        FLYNT ROLEPLAY
+    </div>
+
+    <!-- Botões para abrir os diálogos -->
+    <button class="openModalBtn" id="openCoins">Comprar Coins</button>
+    <button class="openModalBtn" id="openSocial">Redes Sociais</button>
+    <button class="openModalBtn" id="openIP">IP da Cidade</button>
+    <button class="openModalBtn" id="openApp">Aplicativo</button>
+    <button class="openModalBtn" id="openRules">Regras</button>
+
+    <!-- Diálogo para Comprar Coins -->
+    <div id="coinsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeCoins">&times;</span>
+            <h2>Comprar Coins</h2>
+            <p>Compre coins para melhorar sua experiência no servidor.</p>
+            <div class="options">
+                <button>Comprar Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diálogo para Redes Sociais -->
+    <div id="socialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeSocial">&times;</span>
+            <h2>Redes Sociais</h2>
+            <p>Acesse nossas redes sociais para mais novidades:</p>
+            <div class="options">
+                <a href="https://discord.gg/ENrPgXgnH9" target="_blank">Discord</a>
+                <a href="https://www.instagram.com/flynt_roleplay?igsh=eDQ1MDl3cGxqNmRr" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diálogo para IP da Cidade -->
+    <div id="ipModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeIP">&times;</span>
+            <h2>IP da Cidade</h2>
+            <p>O IP do servidor é: <strong>190.102.41.96:8887</strong></p>
+            <p>Entre agora e comece a jogar!</p>
+        </div>
+    </div>
+
+    <!-- Diálogo para Aplicativo -->
+    <div id="appModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeApp">&times;</span>
+            <h2>Aplicativo</h2>
+            <p>Baixe nosso aplicativo para uma experiência melhor:</p>
+            <div class="options">
+                <a href="" target="_blank">Em breve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diálogo para Regras -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRules">&times;</span>
+            <h2>Regras do Servidor</h2>
+            <ul>
+                <li>Respeite todos os jogadores.</li>
+                <li>Não use cheats ou hacks.</li>
+                <li>Não faça spam no chat.</li>
+                <li>Não insulte outros jogadores.</li>
+                <li>Divirta-se!</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <p>&copy; 2025 Street. Todos os direitos reservados.</p>
+        <p><a href="#">Termos de Uso</a></p>
+        <div id="datetime" class="datetime"></div>
+    </div>
+
+    <script>
+        // Função para abrir e fechar os diálogos
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Eventos para abrir os diálogos
+        document.getElementById('openCoins').onclick = function() { openModal('coinsModal'); };
+        document.getElementById('openSocial').onclick = function() { openModal('socialModal'); };
+        document.getElementById('openIP').onclick = function() { openModal('ipModal'); };
+        document.getElementById('openApp').onclick = function() { openModal('appModal'); };
+        document.getElementById('openRules').onclick = function() { openModal('rulesModal'); };
+
+        // Eventos para fechar os diálogos
+        document.getElementById('closeCoins').onclick = function() { closeModal('coinsModal'); };
+        document.getElementById('closeSocial').onclick = function() { closeModal('socialModal'); };
+        document.getElementById('closeIP').onclick = function() { closeModal('ipModal'); };
+        document.getElementById('closeApp').onclick = function() { closeModal('appModal'); };
+        document.getElementById('closeRules').onclick = function() { closeModal('rulesModal'); };
+
+        // Fechar os diálogos clicando fora
+        window.onclick = function(event) {
+            if (event.target.className == "modal") {
+                closeModal(event.target.id);
+            }
+        };
+
+        // Função para mostrar data e hora
+        function updateDatetime() {
+            var currentDate = new Date();
+            var date = currentDate.toLocaleDateString('pt-BR');
+            var time = currentDate.toLocaleTimeString('pt-BR');
+            document.getElementById('datetime').textContent = 'Data: ' + date + ' | Hora: ' + time;
+        }
+
+        // Atualizar data e hora a cada segundo
+        setInterval(updateDatetime, 1000);
+    </script>
+
+</body>
+</html>
